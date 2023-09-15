@@ -180,15 +180,15 @@ function MovieDetails() {
               {movieDetails.overview}
             </p>
             <div  style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-between', height: '5rem'}}>
-              <div  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' , fontSize: '.6rem', backgroundColor: '#BE123C', color: 'white', width: isSmallScreen? '15rem' : '7rem', borderRadius: '.3rem', marginBottom: '1rem',  border: '1px solid #BE123C'}}>
+              <div  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' , fontSize: '.6rem', backgroundColor: '#BE123C', color: 'white', width: isSmallScreen? '15rem' : '8rem', borderRadius: '.3rem', marginBottom: '1rem',  border: '1px solid #BE123C'}}>
                <img src={Ticketicon} alt=""  style={{height: '1rem' , width: '1rem'}} />
                 <p style={{marginLeft: '4px', textTransform: 'capitalize'}}>see shoe time</p>
               </div>
-              <div  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' , fontSize: '.6rem', backgroundColor: '#dcbfc7', color: 'white', width: isSmallScreen? '15rem' : '7rem', borderRadius: '.3rem', border: '1px solid #BE123C'}}>
+              <div  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' , fontSize: '.6rem', backgroundColor: '#dcbfc7', color: 'white', width: isSmallScreen? '15rem' : '8rem', borderRadius: '.3rem', border: '1px solid #BE123C'}}>
                <img src={Listicon} alt=""  style={{height: '1rem' , width: '1rem'}} />
                 <p style={{marginLeft: '4px', textTransform: 'capitalize'}}>more watch options</p>
               </div>
-              <Link to='/' style={{color: '#BE123C'}}>
+              <Link to='/' style={{color: '#BE123C', height: '1rem'}}>
             <p style={{textAlign: 'right', marginTop: '4rem'}}>
               Back To Home
             </p>

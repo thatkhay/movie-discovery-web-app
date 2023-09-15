@@ -13,7 +13,7 @@ function NavBar() {
   // const isSmallScreen = useMediaQuery('(max-width: 600px)')
   const isTabscreen = useMediaQuery('(max-width: 1100px)')
   return (
-    <div style={{width: '12rem', border: '4px solid gray', height: !isTabscreen ? '110vh' : 'auto'  , borderRadius: '0 1rem 1rem 0', padding: '3rem 0'}}>
+    <div style={{width: '12rem', border: '2px solid gray', height: !isTabscreen ? '110vh' : 'auto'  , borderRadius: '0 1rem 1rem 0', padding: '3rem 0'}}>
 <nav style={{display: 'flex', flexDirection:'column', width: '100%', alignItems: 'center', justifyContent: 'center'}}>
   <Link to='/' style={{ textDecoration: 'none', color: 'inherit' , width: '100%', padding: '0 2rem'}}>
   <header style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
