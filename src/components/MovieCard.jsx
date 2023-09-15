@@ -73,6 +73,9 @@ function MovieCard({ movie }) {
   };
 
   return (
+    <Card  className="movie-card" data-testid="movie-card" style={{ position: 'relative', width: isSmallScreen ? '100%' : 'auto' , marginLeft: isSmallScreen ? '10%' : 'auto'}}>
+
+   
     <Link
       to={`/movies/${movie.id}`}
       style={{ textDecoration: 'none' }}
@@ -83,7 +86,7 @@ function MovieCard({ movie }) {
         }
       }}
     >
-      <Card className="movie-card" data-testid="movie-card" style={{ position: 'relative', width: isSmallScreen ? '100%' : 'auto' , marginLeft: isSmallScreen ? '10%' : 'auto'}}>
+      <div>
         <IconButton
           size='small'
           className="favorite-icon"
@@ -143,8 +146,10 @@ function MovieCard({ movie }) {
         >
           <p style={{fontWeight: 'bold'}}>{genre}</p> 
         </p>
-      </Card>
+      </div>
     </Link>
+    
+</Card>
   );
 }
 

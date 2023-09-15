@@ -139,7 +139,7 @@ function MovieDetails() {
         {formatToUTCDate(movieDetails.release_date)}
       </p>
                     <p data-testid="movie-runtime" style={{width: isSmallScreen ? '40%' : '10%'}} >
-                {movieDetails.runtime}  min
+                {movieDetails.runtime}  
               </p>
               <div style={{ display: 'flex' }}>
 
