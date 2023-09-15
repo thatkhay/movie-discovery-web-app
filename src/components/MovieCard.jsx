@@ -10,8 +10,8 @@ import { useMediaQuery } from '@mui/material';
 
 function MovieCard({ movie }) {
   const isSmallScreen = useMediaQuery('(max-width: 600px)')
-  const isTabscreen = useMediaQuery('(max-width: 1100px)')
-  const isPcscreen = useMediaQuery('(min-width: 1110px)')
+  // const isTabscreen = useMediaQuery('(max-width: 1100px)')
+  // const isPcscreen = useMediaQuery('(min-width: 1110px)')
   const [isFavorite, setIsFavorite] = useState(false);
   const [genre, setGenre] = useState('');
   const [imdbPercentage, setImdbPercentage] = useState('');
@@ -105,15 +105,16 @@ function MovieCard({ movie }) {
           style={{ height: '15rem', width: '100%' }}
         />
         <p
-  data-testid="movie-release-date"
+
   style={{
     color: 'gray',
     fontSize: '.6rem',
     textAlign: 'left',
     marginLeft: '5px',
+    fontWeight: 'bold'
   }}
 >
-  <p style={{ fontWeight: 'bold' }}>{formatToUTCDate(formattedReleaseYear)}</p>
+  {formatToUTCDate(formattedReleaseYear)}
 </p>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 .5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width:isSmallScreen? '30%' : '39%' }}>

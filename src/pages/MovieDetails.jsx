@@ -188,10 +188,10 @@ function MovieDetails() {
                <img src={Listicon} alt=""  style={{height: '1rem' , width: '1rem'}} />
                 <p style={{marginLeft: '4px', textTransform: 'capitalize'}}>more watch options</p>
               </div>
-              <Link to='/' style={{color: '#BE123C', height: '1rem'}}>
-            <p style={{textAlign: 'right', marginTop: '4rem'}}>
+              <Link to='/' style={{color: '#BE123C'}}>
+            
               Back To Home
-            </p>
+            
             </Link>
             </div>
             </div>
