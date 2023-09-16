@@ -7,6 +7,7 @@ import axios from 'axios';
 import Imbd from '../assets/imdblogo.png';
 import Rotten from '../assets/rotten.png';
 import { useMediaQuery } from '@mui/material';
+import { toast } from 'react-toastify';
 
 function MovieCard({ movie }) {
   const isSmallScreen = useMediaQuery('(max-width: 37.5rem)')
@@ -64,9 +65,11 @@ function MovieCard({ movie }) {
     if (isFavorite) {
       const updatedFavorites = favorites.filter((id) => id !== movie.id);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  toast.error('Movie removed from favorites');
     } else {
       favorites.push(movie.id);
       localStorage.setItem('favorites', JSON.stringify(favorites));
+      toast.success('Movie added to favorites');
     }
 
     setIsFavorite(!isFavorite);
@@ -82,6 +85,7 @@ function MovieCard({ movie }) {
    onClick={(e) => {
      if (e.target.closest('.favorite-icon')) {
        e.preventDefault();
+        e.stopPropagation(); 
        toggleFavorite();
      }
    }}
