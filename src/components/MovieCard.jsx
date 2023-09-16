@@ -7,10 +7,11 @@ import axios from 'axios';
 import Imbd from '../assets/imdblogo.png';
 import Rotten from '../assets/rotten.png';
 import { useMediaQuery } from '@mui/material';
-import { toast } from 'react-toastify';
 
 function MovieCard({ movie }) {
-  const isSmallScreen = useMediaQuery('(max-width: 37.5rem)');
+  const isSmallScreen = useMediaQuery('(max-width: 37.5rem)')
+  // const isTabscreen = useMediaQuery('(max-width: 68.75rem)')
+  // const isPcscreen = useMediaQuery('(min-width: 69.375rem)')
   const [isFavorite, setIsFavorite] = useState(false);
   const [genre, setGenre] = useState('');
   const [imdbPercentage, setImdbPercentage] = useState('');
@@ -55,132 +56,101 @@ function MovieCard({ movie }) {
     const day = localDate.getUTCDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
+  
 
-  const toggleFavorite = (e) => {
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const toggleFavorite = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-  // Prevent the Link click event when the favorite icon is clicked
-  if (e.target.closest('.favorite-icon')) {
-    e.preventDefault();
-    e.stopPropagation(); // Add this line to stop event propagation
-  }
+    if (isFavorite) {
+      const updatedFavorites = favorites.filter((id) => id !== movie.id);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    } else {
+      favorites.push(movie.id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
 
-  const isAlreadyFavorite = favorites.includes(movie.id);
-
-  if (isAlreadyFavorite) {
-    const updatedFavorites = favorites.filter((id) => id !== movie.id);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    setIsFavorite(false);
-    toast.error(`${movie.title} removed from favorites!`);
-  } else {
-    favorites.push(movie.id);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    setIsFavorite(true);
-    toast.success(`${movie.title} added to favorites!`);
-  }
-};
-
+    setIsFavorite(!isFavorite);
+  };
 
   return (
-    <Card
-      className="movie-card"
-      data-testid="movie-card"
-      style={{
-        position: 'relative',
-        width: '100%',
-        marginLeft: isSmallScreen ? '10%' : 'auto',
-      }}
-    >
-      <Link
-        to={`/movies/${movie.id}`}
-        style={{ textDecoration: 'none', color: 'inherit' }}
-        onClick={toggleFavorite}
-      >
-        <div>
-          <IconButton
-            size="small"
-            className="favorite-icon"
-            style={{
-              position: 'absolute',
-              top: '.3125rem',
-              right: '.3125rem',
-              backgroundColor: 'white',
-              cursor: 'pointer',
-            }}
-            onClick={toggleFavorite}
-          >
-            {isFavorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
-          </IconButton>
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-            alt={movie.title}
-            data-testid="movie-poster"
-            style={{ height: '240px', width: '100%' }}
-          />
-          <p
-            data-testid="movie-release-date"
-            style={{
-              color: 'gray',
-              fontSize: '9.6px',
-              textAlign: 'left',
-              marginLeft: '.3125rem',
-              fontWeight: 'bold',
-            }}
-          >
-            {formatToUTCDate(formattedReleaseYear)}
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '0 8px',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                width: isSmallScreen ? '30%' : '39%',
-              }}
-            >
-              <img src={Imbd} alt="" style={{ height: '12.8px', width: '27.2px' }} />
-              <span style={{ fontSize: '9.6px' }}>{imdbPercentage} / 100</span>
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                width: isSmallScreen ? '25%' : '29%',
-              }}
-            >
-              <img src={Rotten} alt="" style={{ height: '12.8px' }} />
-              <span style={{ fontSize: '9.6px' }}>{rottenPercentage} / 100</span>
-            </div>
-          </div>
-          <h2
-            data-testid="movie-title"
-            style={{ fontSize: '12.8px', textAlign: 'left', marginLeft: '.3125rem' }}
-          >
-            {movie.title}
-          </h2>
-          <p
-            data-testid="movie-genre"
-            style={{
-              color: 'gray',
-              fontSize: '9.6px',
-              textAlign: 'left',
-              marginLeft: '.3125rem',
-            }}
-          >
-            <p style={{ fontWeight: 'bold' }}>{genre}</p>
-          </p>
-        </div>
-      </Link>
-    </Card>
-  );
+    
+   <Card className="movie-card" data-testid="movie-card"  style={{ position: 'relative', width: '100%' , marginLeft: isSmallScreen ? '10%' : 'auto', }}>
+  
+        <Link
+   to={`/movies/${movie.id}`}
+   style={{ textDecoration: 'none', color: 'inherit' }}
+   onClick={(e) => {
+     if (e.target.closest('.favorite-icon')) {
+       e.preventDefault();
+       toggleFavorite();
+     }
+   }}
+ >
+  <div>
+       <IconButton
+       size='small'
+       className="favorite-icon"
+       style={{
+         position: 'absolute',
+         top: '.3125rem',
+         right: '.3125rem',
+         backgroundColor: 'white',
+         cursor: 'pointer',
+       }}
+       onClick={toggleFavorite}
+     >
+       {isFavorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+     </IconButton>
+     <img
+       src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+       alt={movie.title}
+       data-testid="movie-poster"
+       style={{ height: '240px', width: '100%' }}
+     />
+     <p
+     data-testid="movie-release-date"
+
+style={{
+ color: 'gray',
+ fontSize: '9.6px',
+ textAlign: 'left',
+ marginLeft: '.3125rem',
+ fontWeight: 'bold'
+}}
+>
+{formatToUTCDate(formattedReleaseYear)}
+</p>
+     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 8px' }}>
+       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width:isSmallScreen? '30%' : '39%' }}>
+         <img src={Imbd} alt="" style={{ height: '12.8px', width: '27.2px' }} />
+         <span style={{ fontSize: '9.6px' }}>{imdbPercentage} / 100</span>
+       </div>
+       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width:isSmallScreen? '25%': '29%' }}>
+         <img src={Rotten} alt="" style={{ height: '12.8px' }} />
+         <span style={{ fontSize: '9.6px' }}>{rottenPercentage} / 100</span>
+       </div>
+     </div>
+     <h2
+       data-testid="movie-title"
+       style={{ fontSize: '12.8px', textAlign: 'left', marginLeft: '.3125rem' }}
+     >
+       {movie.title}
+     </h2>
+     <p
+       data-testid="movie-genre"
+       style={{
+         color: 'gray',
+         fontSize: '9.6px',
+         textAlign: 'left',
+         marginLeft: '.3125rem',
+       }}
+     >
+       <p style={{fontWeight: 'bold'}}>{genre}</p> 
+     </p>
+    </div>
+        </Link>
+  </Card>
+  )
 }
 
 export default MovieCard;
