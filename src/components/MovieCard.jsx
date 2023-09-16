@@ -74,11 +74,11 @@ function MovieCard({ movie }) {
 
   return (
     
-   <Card className="movie-card" data-testid="movie-card"  style={{ position: 'relative', width: '100%' , marginLeft: isSmallScreen ? '10%' : 'auto'}}>
+   <Card className="movie-card" data-testid="movie-card"  style={{ position: 'relative', width: '100%' , marginLeft: isSmallScreen ? '10%' : 'auto', }}>
   
         <Link
    to={`/movies/${movie.id}`}
-   style={{ textDecoration: 'none' }}
+   style={{ textDecoration: 'none', color: 'inherit' }}
    onClick={(e) => {
      if (e.target.closest('.favorite-icon')) {
        e.preventDefault();
