@@ -59,17 +59,19 @@ function MovieCard({ movie }) {
   };
   
 
-  const toggleFavorite = () => {
+  const toggleFavorite = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); 
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     if (isFavorite) {
       const updatedFavorites = favorites.filter((id) => id !== movie.id);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  toast.error('Movie removed from favorites');
+  toast.error(`${movie.title} has been removed from favorites`);
     } else {
       favorites.push(movie.id);
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      toast.success('Movie added to favorites');
+      toast.success( `${movie.title} has been added to favorites`);
     }
 
     setIsFavorite(!isFavorite);
@@ -77,18 +79,12 @@ function MovieCard({ movie }) {
 
   return (
     
-   <Card className="movie-card" data-testid="movie-card"  style={{ position: 'relative', width: '100%' , marginLeft: isSmallScreen ? '10%' : 'auto', }}>
+   <Card className="movie-card" data-testid="movie-card"  style={{ position: 'relative', width: isSmallScreen ? '21rem': '100%'  }}>
   
         <Link
    to={`/movies/${movie.id}`}
    style={{ textDecoration: 'none', color: 'inherit' }}
-   onClick={(e) => {
-     if (e.target.closest('.favorite-icon')) {
-       e.preventDefault();
-        e.stopPropagation(); 
-       toggleFavorite();
-     }
-   }}
+   
  >
   <div>
        <IconButton

@@ -85,7 +85,7 @@ function MovieDetails() {
   }, [id]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
+    <div style={{ display: 'flex', alignItems: 'center',}} >
 
 {!isSmallScreen && <NavBar /> }
     <div style={{ display: 'flex', alignItems: 'center', flexDirection: isSmallScreen ? 'column' : 'column' , justifyContent: 'space-between'}}>
